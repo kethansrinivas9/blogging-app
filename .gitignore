@@ -1,0 +1,62 @@
+# Ignore all IDE and OS-related files
+blogging-backend/.idea/
+blogging-backend/.vscode/
+blogging-backend/.DS_Store
+
+# 🚀 Backend (Spring Boot)
+blogging-backend/target/
+blogging-backend/bin/
+blogging-backend/out/
+blogging-backend/logs/
+blogging-backend/*.log
+blogging-backend/*.jar
+blogging-backend/*.war
+blogging-backend/.mvn/
+blogging-backend/mvnw*
+blogging-backend/*.iml
+
+# Spring Boot environment and config files
+blogging-backend/application.properties
+blogging-backend/application.yml
+blogging-backend/application-*.yml
+blogging-backend/config/
+
+# Database and cache files
+blogging-backend/*.h2.db
+blogging-backend/*.mv.db
+blogging-backend/*.sql
+
+# Gradle/Maven build files
+blogging-backend/build/
+blogging-backend/.gradle/
+blogging-backend/*.class
+
+# 🚀 Frontend (React)
+blogging-frontend/node_modules/
+blogging-frontend/.next/
+blogging-frontend/.cache/
+blogging-frontend/dist/
+blogging-frontend/build/
+blogging-frontend/yarn.lock
+blogging-frontend/package-lock.json
+
+# Ignore environment files
+blogging-frontend/.env
+blogging-frontend/.env.local
+blogging-frontend/.env.development
+blogging-frontend/.env.production
+
+# Ignore dependency management
+blogging-frontend/npm-debug.log*
+blogging-frontend/yarn-error.log*
+blogging-frontend/pnpm-debug.log*
+blogging-frontend/.turbo/
+blogging-frontend/.eslintcache
+blogging-frontend/.parcel-cache
+
+# Ignore editor and OS-specific files
+*.log
+*.swp
+*.swo
+*.bak
+*.tmp
