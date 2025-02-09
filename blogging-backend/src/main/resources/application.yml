@@ -1,0 +1,34 @@
+server:
+  port: '8080'
+
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/blogging_app
+    password: kethan
+  application:
+    name: demo
+  devtools:
+    restart:
+      quiet-period: 500ms
+      poll-interval: 1s
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+welcome:
+  message: Welcome to the Prod home page!!
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
