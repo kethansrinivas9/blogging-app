@@ -40,6 +40,11 @@ public class UserController {
         return userService.register(user);
     }
 
+    @PostMapping("/login")
+    public String login(@RequestBody User user) {
+        return userService.login(user);
+    }
+
     @PutMapping("/{id}")
     public User editUser(@PathVariable Long id, @RequestBody User user) throws Exception {
         return userService.editUserById(id, user);

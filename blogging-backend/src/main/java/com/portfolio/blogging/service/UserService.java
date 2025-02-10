@@ -15,4 +15,6 @@ public interface UserService {
     User editUserById(Long id, User user) throws Exception;
 
     List<Blog> getBlogsByUser(Long userId) throws Exception;
+
+    String login(User user);
 }
