@@ -7,6 +7,7 @@ import com.portfolio.blogging.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,39 +22,16 @@ import java.util.Optional;
 
 @Service
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
-
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    private final AuthenticationManager authenticationManager;
-
     private final BlogService blogService;
-
     private final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+
 
     public User findById(Long userId) {
         return userRepository.findById(userId).get();
-    }
-
-    public User register(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
-        return userRepository.save(user);
-    }
-
-    @Override
-    public String login(User user) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
-        );
-
-        if(authentication.isAuthenticated())
-            return "Authentication Success!";
-
-        return "Authentication Failure";
     }
 
     @Override
