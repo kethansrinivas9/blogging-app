@@ -60,3 +60,6 @@ blogging-frontend/.parcel-cache
 *.swo
 *.bak
 *.tmp
+
+# Ignore temp folder for a bit
+temp/

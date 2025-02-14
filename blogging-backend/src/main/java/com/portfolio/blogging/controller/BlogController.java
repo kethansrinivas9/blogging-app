@@ -1,5 +1,6 @@
 package com.portfolio.blogging.controller;
 
+import com.portfolio.blogging.dto.BlogDTO;
 import com.portfolio.blogging.entity.Blog;
 import com.portfolio.blogging.service.BlogService;
 import com.portfolio.blogging.service.BlogServiceImpl;
@@ -18,6 +19,11 @@ public class BlogController {
     @PostMapping("/create")
     public Blog create(@RequestBody Blog blog) throws Exception {
         return blogService.create(blog);
+    }
+
+    @GetMapping("/all")
+    public List<BlogDTO> getAllBlogs() {
+        return blogService.getAllBlogs();
     }
 
 }
