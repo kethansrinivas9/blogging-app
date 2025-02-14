@@ -1,6 +1,8 @@
+'use client';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from "next/navigation"; // ✅ Use Next.js router
+import Link from "next/link"; // ✅ Use Next.js Link instead of <a>
 
 const SignupPage: React.FC = () => {
     const [name, setName] = useState<string>('');
@@ -9,7 +11,7 @@ const SignupPage: React.FC = () => {
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState('');
-    const navigate = useNavigate();
+    const router = useRouter(); // ✅ Use Next.js router
 
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -36,7 +38,7 @@ const SignupPage: React.FC = () => {
                     setSuccess('Account created successfully! You can now log in.');
                     sessionStorage.setItem('email', email);
                     sessionStorage.setItem('password', password);
-                    navigate("/login");
+                    router.push("/login");
                 } else {
                     setError('Signup failed. Please try again.');
                 }
@@ -105,9 +107,9 @@ const SignupPage: React.FC = () => {
 
         <div className="text-center text-sm text-gray-500">
             Already have an account?{' '}
-            <a href="/login" className="text-blue-500 hover:underline">
+            <Link  href="/login" className="text-blue-500 hover:underline">
             Login
-            </a>
+            </Link>
         </div>
         </div>
     </div>

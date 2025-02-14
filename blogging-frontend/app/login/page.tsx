@@ -1,13 +1,15 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from "next/navigation"; // ✅ Use Next.js router
 import Cookies from 'js-cookie';
+import Link from "next/link"; // ✅ Use Next.js Link instead of <a>
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const navigate = useNavigate();
+  const router = useRouter(); // ✅ Use Next.js router
 
   useEffect(() => {
     // Retrieve email and password from sessionStorage
@@ -48,7 +50,7 @@ const LoginPage: React.FC = () => {
               
               //Can shift to Strict when deployed in https mode later
               //Cookies.set('jwt', token, { secure: false, sameSite: 'Strict' });
-              navigate("/homepage");
+              router.push("/home");
             } else {
                 setError('Signup failed. Please try again.');
             }
@@ -101,9 +103,9 @@ const LoginPage: React.FC = () => {
 
         <div className="text-center text-sm text-gray-500">
           Don't have an account?{' '}
-          <a href="/signup" className="text-blue-500 hover:underline">
+          <Link href="/signup" className="text-blue-500 hover:underline">
             Sign up
-          </a>
+          </Link>
         </div>
       </div>
     </div>

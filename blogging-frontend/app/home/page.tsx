@@ -1,7 +1,9 @@
+'use client';
 import React, { useState, useEffect } from 'react';
-import { LogOut } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from "next/navigation"; // ✅ Use Next.js router
 import Cookies from 'js-cookie';
+import Link from "next/link"; // ✅ Use Next.js Link instead of <a>
+import Header from '../header/page';
 
 // Define interfaces for our data types
 interface Blog {
@@ -15,7 +17,7 @@ interface Blog {
 const HomePagenew = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const jwt_token = Cookies.get('jwt'); // Remove the JWT token
-    const navigate = useNavigate();
+    const router = useRouter(); // ✅ Use Next.js router
     const [loading, setLoading] = useState(true);
      // This state will track which blog's content is expanded
     const [expandedBlogId, setExpandedBlogId] = useState<number | null>(null);
@@ -55,7 +57,7 @@ const handleLogout = async (e: React.FormEvent) => {
     document.cookie = "JSESSIONID=; Path=/; Max-Age=0;";
     Cookies.remove('jwt'); // Remove the JWT token
 
-    navigate('/login'); // Redirect to login
+    router.push("/login");
     };
 
 
@@ -65,12 +67,16 @@ const handleLogout = async (e: React.FormEvent) => {
   };
 
     return (
-        <div  className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div>
+            <Header/>
+
+        <div className="max-w-screen-2xl mx-auto py-6 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
                 {loading ? (
                     <p className="text-center text-gray-600">Loading blogs...</p>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        
+                        <div className="grid grid-cols-1 gap-6">
                         {blogs.length === 0 ? (
                             <p className="text-center text-gray-600">No blogs available.</p>
                         ) : (
@@ -102,7 +108,8 @@ const handleLogout = async (e: React.FormEvent) => {
                     </div>
                 )}
             </div>
-        </div>
+            </div>
+                    </div>
     );
 };
 
