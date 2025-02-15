@@ -56,10 +56,11 @@ const LoginPage: React.FC = () => {
             }
         } catch (err: any) {
             console.error(err);
-            setError(err.response?.data?.message || 'Something went wrong.');
+            setError(err.response?.data?.message || 'The password you’ve entered is incorrect. Please try again!');
         }
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

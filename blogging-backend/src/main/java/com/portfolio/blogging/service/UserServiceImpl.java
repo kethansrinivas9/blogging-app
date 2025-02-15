@@ -1,6 +1,8 @@
 package com.portfolio.blogging.service;
 
 import com.portfolio.blogging.controller.UserController;
+import com.portfolio.blogging.dto.BlogDTO;
+import com.portfolio.blogging.dto.UserDTO;
 import com.portfolio.blogging.entity.Blog;
 import com.portfolio.blogging.entity.User;
 import com.portfolio.blogging.repository.UserRepository;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Data
@@ -32,6 +35,12 @@ public class UserServiceImpl implements UserService{
 
     public User findById(Long userId) {
         return userRepository.findById(userId).get();
+    }
+
+    @Override
+    public UserDTO findByEmail(String email) {
+        User user = userRepository.findByEmail(email).get();
+        return new UserDTO(user.getId(), user.getName(), user.getEmail());
     }
 
     @Override

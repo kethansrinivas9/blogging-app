@@ -21,8 +21,12 @@ const HomePagenew = () => {
     const [loading, setLoading] = useState(true);
      // This state will track which blog's content is expanded
     const [expandedBlogId, setExpandedBlogId] = useState<number | null>(null);
-  
-  useEffect(() => {
+
+
+    useEffect(() => {
+      
+
+
     // Replace with your actual API call
     const fetchBlogs = async () => {
       try {
@@ -43,22 +47,6 @@ const HomePagenew = () => {
     fetchBlogs();
   }, []);
 
-
-
-const handleLogout = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevents form reload
-    
-    await fetch("http://localhost:8080/auth/logout", {
-        method: "POST",
-        credentials: "include", // Send cookies with the request
-    });
-    
-    // Optionally, remove client-side cookies (if stored manually)
-    document.cookie = "JSESSIONID=; Path=/; Max-Age=0;";
-    Cookies.remove('jwt'); // Remove the JWT token
-
-    router.push("/login");
-    };
 
 
    const handleToggleContent = (id: number) => {

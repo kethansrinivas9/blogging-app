@@ -1,6 +1,7 @@
 package com.portfolio.blogging.controller;
 
 
+import com.portfolio.blogging.dto.UserDTO;
 import com.portfolio.blogging.entity.Blog;
 import com.portfolio.blogging.entity.User;
 import com.portfolio.blogging.service.UserService;
@@ -25,6 +26,11 @@ public class UserController {
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
         return userService.findById(id);
+    }
+
+    @GetMapping("/email/{email}")
+    public UserDTO getUserByEmail(@PathVariable String email) {
+        return userService.findByEmail(email);
     }
 
     @GetMapping("/all")

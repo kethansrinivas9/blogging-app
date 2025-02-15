@@ -31,8 +31,6 @@ public class AuthServiceImpl implements AuthService{
                 new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
         );
 
-
-
         if(authentication.isAuthenticated())
             return jwtService.generateToken(user);
 
