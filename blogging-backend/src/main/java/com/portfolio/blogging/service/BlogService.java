@@ -8,7 +8,7 @@ import java.util.List;
 public interface BlogService {
     Blog create(Blog blog) throws Exception;
 
-    List<Blog> getBlogsByUser(Long userId);
+    List<BlogDTO> getBlogsByUser(Long userId);
 
     List<BlogDTO> getAllBlogs();
 }

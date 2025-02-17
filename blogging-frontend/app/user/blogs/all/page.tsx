@@ -1,9 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { useRouter } from "next/navigation"; // ✅ Use Next.js router
 import Cookies from 'js-cookie';
-import Link from "next/link"; // ✅ Use Next.js Link instead of <a>
-import Header from '../header/page';
+import Header from '../../../header/page';
 
 // Define interfaces for our data types
 interface Blog {
@@ -14,30 +12,32 @@ interface Blog {
   userName: string;
 }
 
-const HomePagenew = () => {
+const UserBlogs = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const jwt_token = Cookies.get('jwt'); // Remove the JWT token
-    const router = useRouter(); // ✅ Use Next.js router
     const [loading, setLoading] = useState(true);
      // This state will track which blog's content is expanded
     const [expandedBlogId, setExpandedBlogId] = useState<number | null>(null);
 
 
     useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/blog/all', {
-          headers: {
-            'Authorization': `Bearer ${jwt_token}`
-          }
-        });
-        const data = await response.json();
-          setBlogs(data);
-           setLoading(false);
-      } catch (error) {
-          console.error('Error fetching blogs:', error);
-          setLoading(false);
-      }
+        const fetchBlogs = async () => {
+        
+        const id = sessionStorage.getItem("userid");
+        console.log("id: " + id);
+        try {
+            const response = await fetch(`http://localhost:8080/user/${encodeURIComponent(id)}/blog/all`, {
+                headers: {
+                'Authorization': `Bearer ${jwt_token}`
+                }
+            });
+            const data = await response.json();
+            setBlogs(data);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching blogs:', error);
+            setLoading(false);
+        }
     };
     
     fetchBlogs();
@@ -98,4 +98,4 @@ const HomePagenew = () => {
 };
 
 
-export default HomePagenew;
+export default UserBlogs;

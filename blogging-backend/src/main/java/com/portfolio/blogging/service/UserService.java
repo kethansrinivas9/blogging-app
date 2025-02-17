@@ -1,5 +1,6 @@
 package com.portfolio.blogging.service;
 
+import com.portfolio.blogging.dto.BlogDTO;
 import com.portfolio.blogging.dto.UserDTO;
 import com.portfolio.blogging.entity.Blog;
 import com.portfolio.blogging.entity.User;
@@ -15,6 +16,6 @@ public interface UserService {
 
     User editUserById(Long id, User user) throws Exception;
 
-    List<Blog> getBlogsByUser(Long userId) throws Exception;
+    List<BlogDTO> getBlogsByUser(Long userId) throws Exception;
 
 }

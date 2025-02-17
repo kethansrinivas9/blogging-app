@@ -1,6 +1,7 @@
 package com.portfolio.blogging.controller;
 
 
+import com.portfolio.blogging.dto.BlogDTO;
 import com.portfolio.blogging.dto.UserDTO;
 import com.portfolio.blogging.entity.Blog;
 import com.portfolio.blogging.entity.User;
@@ -38,15 +39,16 @@ public class UserController {
         return userService.findAll();
     }
 
-
-
     @PutMapping("/{id}")
     public User editUser(@PathVariable Long id, @RequestBody User user) throws Exception {
         return userService.editUserById(id, user);
     }
 
-    @GetMapping("/{userId}/blogs")
-    public List<Blog> getBlogsByUser(@PathVariable Long userId) throws Exception {
+    /*
+     * This is the method to fetch all the blogs of current logged-in user
+     * */
+    @GetMapping("/{userId}/blog/all")
+    public List<BlogDTO> getBlogsByUser(@PathVariable Long userId) throws Exception {
         return userService.getBlogsByUser(userId);
     }
 

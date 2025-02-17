@@ -18,6 +18,8 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String title;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
     @ManyToOne(fetch = FetchType.EAGER)

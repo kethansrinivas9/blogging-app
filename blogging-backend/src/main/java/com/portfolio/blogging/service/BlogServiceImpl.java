@@ -36,8 +36,10 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> getBlogsByUser(Long userId) {
-        return blogRepository.findByUserId(userId);
+    public List<BlogDTO> getBlogsByUser(Long userId) {
+        List<Blog> blogs = blogRepository.findByUserId(userId);
+
+        return blogs.stream().map(BlogDTO::new).collect(Collectors.toList());
     }
 
     @Override

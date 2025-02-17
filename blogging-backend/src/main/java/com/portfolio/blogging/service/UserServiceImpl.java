@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<Blog> getBlogsByUser(Long userId) throws Exception {
+    public List<BlogDTO> getBlogsByUser(Long userId) throws Exception {
         User user = findById(userId);
 
         if(user!=null)

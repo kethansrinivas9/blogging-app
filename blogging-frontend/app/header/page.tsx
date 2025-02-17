@@ -18,7 +18,6 @@ const Header: React.FC = () => {
   useEffect(() => {
     // Retrieve email and password from sessionStorage
     const storedEmail = sessionStorage.getItem('email');
-    //console.log("===================================email value:" + storedEmail);
 
     const fetchUser = async () => {
       try {
@@ -34,6 +33,13 @@ const Header: React.FC = () => {
         }
         const data = await response.json();
         setUser(data);
+        
+
+        //store the details to be used later in other components
+        sessionStorage.setItem('username', data?.name);
+        sessionStorage.setItem('userid', data?.id);
+
+
         console.log("===================================email value:" + data?.email)
       } catch (error) {
         console.error("Error fetching user:", error);
@@ -54,6 +60,12 @@ const Header: React.FC = () => {
     // Optionally, remove client-side cookies (if stored manually)
     document.cookie = "JSESSIONID=; Path=/; Max-Age=0;";
     Cookies.remove('jwt'); // Remove the JWT token
+
+    //store the details to be used later in other components
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('userid');
+
+
     router.push("/login");
   };
   
@@ -73,8 +85,8 @@ const Header: React.FC = () => {
       
             {/* Navigation links */}
             <div className="hidden md:flex space-x-8">
-              <a href="#" className="text-white">My blogs</a>
-              <a href="#" className="text-white">Create a blog</a>
+              <a href="/user/blogs/all" className="text-white">My blogs</a>
+              <a href="/blog/create" className="text-white">Create a blog</a>
             </div>
 
             {/* User Menu */}
@@ -100,7 +112,7 @@ const Header: React.FC = () => {
                   <span className="block text-sm text-gray-500 dark:text-gray-400">{user?.email}</span>
                 </div>
                 <ul className="py-2">
-                  <li><a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600">Dashboard</a></li>
+                  <li><a href="/home" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600">Home</a></li>
                   <li><a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600">Settings</a></li>
                   <li><a href="#" onClick={(e) => {
                     e.preventDefault();
