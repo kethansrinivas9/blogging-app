@@ -29,21 +29,18 @@ public class AuthController {
 
         authService.register(user);
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully!");
-
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
         logger.info("==========user object {}", user.toString());
 
-
-
         try {
             String jwt = authService.login(user);
 
             return ResponseEntity.ok(jwt);
         } catch (Exception e) {
-            return ResponseEntity.status(401).body("Login unsuccessful due to: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized access");
         }
     }
 
@@ -53,8 +50,5 @@ public class AuthController {
         if (session != null) {
             session.invalidate(); // Destroy session
         }
-
-        // Remove JSESSIONID cookie
-        //response.setHeader("Set-Cookie", "JSESSIONID=; Path=/; HttpOnly; Secure; Max-Age=0");
     }
 }

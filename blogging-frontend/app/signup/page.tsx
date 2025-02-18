@@ -9,7 +9,6 @@ const SignupPage: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
-    const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState('');
     const router = useRouter(); // ✅ Use Next.js router
 
@@ -21,8 +20,6 @@ const SignupPage: React.FC = () => {
         } else {
             setError('');
             setSuccess('');
-            setLoading(true);
-            // handle signup logic here (e.g., call API to register)
             console.log('Signing up with', { name, email, password });
             try {
                 const response = await axios.post('http://localhost:8080/auth/register', {
@@ -42,12 +39,13 @@ const SignupPage: React.FC = () => {
                 } else {
                     setError('Signup failed. Please try again.');
                 }
-            } catch (err: any) {
-                console.error(err);
-                setError(err.response?.data?.message || 'Something went wrong.');
-            } finally {
-                setLoading(false);
+            } catch (err: unknown) {
+                if (err instanceof Error) {
+                    console.error(err);
+                    setError(err.message || 'Something went wrong.');
+                }
             }
+            
         };
 
     };

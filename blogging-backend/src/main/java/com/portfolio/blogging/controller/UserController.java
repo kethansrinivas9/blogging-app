@@ -3,11 +3,8 @@ package com.portfolio.blogging.controller;
 
 import com.portfolio.blogging.dto.BlogDTO;
 import com.portfolio.blogging.dto.UserDTO;
-import com.portfolio.blogging.entity.Blog;
 import com.portfolio.blogging.entity.User;
 import com.portfolio.blogging.service.UserService;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

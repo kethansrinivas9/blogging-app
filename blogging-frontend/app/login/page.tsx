@@ -45,18 +45,24 @@ const LoginPage: React.FC = () => {
                 sessionStorage.setItem('email', email);
                 sessionStorage.setItem('password', password);
               
-                const token = response.data; 
+              const token = response.data; 
+              
+              //The cookie expiration is set to 1 hour to match with the JWT expiration of one hour
               Cookies.set('jwt', token, { secure: false, sameSite: 'Lax', expires: 1 / 24 });
               
               //Can shift to Strict when deployed in https mode later
               //Cookies.set('jwt', token, { secure: false, sameSite: 'Strict' });
               router.push("/home");
             } else {
-                setError('Signup failed. Please try again.');
+                setError('Login failed. Please try again.');
             }
-        } catch (err: any) {
+        } catch (err: unknown) {
+      
+          if (err instanceof Error) {
             console.error(err);
-            setError(err.response?.data?.message || 'The password you’ve entered is incorrect. Please try again!');
+            setError(err.message || 'The password you’ve entered is incorrect. Please try again!');
+          }
+            
         }
     }
   };
@@ -103,7 +109,7 @@ const LoginPage: React.FC = () => {
         </form>
 
         <div className="text-center text-sm text-gray-500">
-          Don't have an account?{' '}
+          Don&apos;t have an account?{' '}
           <Link href="/signup" className="text-blue-500 hover:underline">
             Sign up
           </Link>

@@ -25,12 +25,22 @@ const UserBlogs = () => {
         
         const id = sessionStorage.getItem("userid");
         console.log("id: " + id);
-        try {
+            try {
+            
+                if (id == null)
+                    throw new Error("User not logged-in or userid is null");
+
             const response = await fetch(`http://localhost:8080/user/${encodeURIComponent(id)}/blog/all`, {
                 headers: {
                 'Authorization': `Bearer ${jwt_token}`
                 }
             });
+
+            if (!response.ok) {
+                console.log(response.status);
+                throw new Error(`HTTP Error! Status: ${response.status}`);
+            }
+
             const data = await response.json();
             setBlogs(data);
             setLoading(false);
@@ -41,7 +51,7 @@ const UserBlogs = () => {
     };
     
     fetchBlogs();
-  }, []);
+    }, [jwt_token]);
 
 
 

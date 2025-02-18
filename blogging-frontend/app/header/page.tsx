@@ -1,3 +1,4 @@
+"use client";
 import { useRouter } from "next/navigation"; // ✅ Use Next.js router
 import Cookies from "js-cookie";
 import React, { useState, useEffect } from 'react';
@@ -21,6 +22,9 @@ const Header: React.FC = () => {
 
     const fetchUser = async () => {
       try {
+          if (storedEmail == null)
+          throw new Error("User not logged-in or user email is null");
+        
         const response = await fetch(`http://localhost:8080/user/email/${encodeURIComponent(storedEmail)}`, {
               method: "GET",
               headers: {
@@ -47,7 +51,7 @@ const Header: React.FC = () => {
     };
 
     fetchUser();
-  }, []);
+  }, [jwt_token]);
   
   
 
@@ -113,7 +117,6 @@ const Header: React.FC = () => {
                 </div>
                 <ul className="py-2">
                   <li><a href="/home" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600">Home</a></li>
-                  <li><a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600">Settings</a></li>
                   <li><a href="#" onClick={(e) => {
                     e.preventDefault();
                     handleLogout();
@@ -138,8 +141,8 @@ const Header: React.FC = () => {
 
           {/* Mobile Menu */}
           <div className="hidden w-full md:hidden mt-4" id="mobile-menu">
-            <a href="#" className="block py-2 text-white">About</a>
-            <a href="#" className="block py-2 text-white">Services</a>
+            <a href="/user/blogs/all" className="block py-2 text-white">My blogs</a>
+            <a href="/blog/create" className="block py-2 text-white">Create a blog</a>
           </div>
 
         </div>

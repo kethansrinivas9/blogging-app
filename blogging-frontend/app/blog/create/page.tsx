@@ -1,9 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useRouter } from "next/navigation"; // ✅ Use Next.js router
 import Cookies from 'js-cookie';
-import Link from "next/link"; // ✅ Use Next.js Link instead of <a>
 import Header from "../../header/page";
 
 interface User {
@@ -12,15 +9,11 @@ interface User {
   email: string;
 }
 
-
-
-
 const LoginPage: React.FC = () => {
     const [title, settitle] = useState<string>('');
     const [content, setcontent] = useState<string>('');
     const [error, setError] = useState<string>('');
     const [success, setSuccess] = useState('');
-    const router = useRouter(); // ✅ Use Next.js router
     const jwt_token = Cookies.get('jwt'); // Remove the JWT token
     const [user, setUser] = useState<User>();
 
@@ -30,6 +23,8 @@ const LoginPage: React.FC = () => {
 
         async function fetchUserDetails() {
             try {
+                          if (storedEmail == null)
+                            throw new Error("User not logged-in or user email is null");
                 const response = await fetch(`http://localhost:8080/user/email/${encodeURIComponent(storedEmail)}`, {
                     method: "GET",
                     headers: {
@@ -52,7 +47,7 @@ const LoginPage: React.FC = () => {
         }
         
         fetchUserDetails();
-    }, []);
+    }, [jwt_token]);
     
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -89,7 +84,7 @@ const LoginPage: React.FC = () => {
                     })
                 });
 
-                if (response.ok) { 
+                if (response.ok || response.status == 201) { 
                     setError('');
                     setSuccess('Blog created successfully! You can view your new blog in home page');
                     settitle('');
@@ -98,9 +93,12 @@ const LoginPage: React.FC = () => {
                 } else {
                     setError('Blog creation failed. Please try again.');
                 }
-            } catch (err: any) {
+            } catch (err: unknown) {
                 console.error(err);
-                setError(err.response?.data?.message || 'The content you’ve entered is incorrect. Please try again!');
+                if (err instanceof Error) {
+                    setError(err.message || 'The content you’ve entered is incorrect. Please try again!');
+                }
+                
             }
         }
   };

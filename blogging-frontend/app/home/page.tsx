@@ -1,8 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { useRouter } from "next/navigation"; // ✅ Use Next.js router
 import Cookies from 'js-cookie';
-import Link from "next/link"; // ✅ Use Next.js Link instead of <a>
 import Header from '../header/page';
 
 // Define interfaces for our data types
@@ -17,7 +15,6 @@ interface Blog {
 const HomePagenew = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const jwt_token = Cookies.get('jwt'); // Remove the JWT token
-    const router = useRouter(); // ✅ Use Next.js router
     const [loading, setLoading] = useState(true);
      // This state will track which blog's content is expanded
     const [expandedBlogId, setExpandedBlogId] = useState<number | null>(null);
@@ -41,7 +38,7 @@ const HomePagenew = () => {
     };
     
     fetchBlogs();
-  }, []);
+}, [jwt_token]);
 
 
 
