@@ -8,6 +8,7 @@ import com.portfolio.blogging.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,31 +23,31 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.findById(id);
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(userService.findById(id));
     }
 
     @GetMapping("/email/{email}")
-    public UserDTO getUserByEmail(@PathVariable String email) {
-        return userService.findByEmail(email);
+    public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
+        return ResponseEntity.ok().body(userService.findByEmail(email));
     }
 
     @GetMapping("/all")
-    public List<User> getAllUsers() {
-        return userService.findAll();
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok().body(userService.findAll());
     }
 
     @PutMapping("/{id}")
-    public User editUser(@PathVariable Long id, @RequestBody User user) throws Exception {
-        return userService.editUserById(id, user);
+    public ResponseEntity<User> editUser(@PathVariable Long id, @RequestBody User user) throws Exception {
+        return ResponseEntity.ok().body(userService.editUserById(id, user));
     }
 
     /*
      * This is the method to fetch all the blogs of current logged-in user
      * */
     @GetMapping("/{userId}/blog/all")
-    public List<BlogDTO> getBlogsByUser(@PathVariable Long userId) throws Exception {
-        return userService.getBlogsByUser(userId);
+    public ResponseEntity<List<BlogDTO>> getBlogsByUser(@PathVariable Long userId) throws Exception {
+        return ResponseEntity.ok().body(userService.getBlogsByUser(userId));
     }
 
 }
