@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Data
@@ -49,14 +50,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User editUserById(Long id, User user) throws Exception {
+    public UserDTO editUserById(Long id, UserDTO user) throws Exception {
         return userRepository.findById(id).map(
                 existinguser -> {
                     existinguser.setEmail(user.getEmail());
                     existinguser.setName(user.getName());
-                    existinguser.setPassword(user.getPassword());
 
-                    return userRepository.save(existinguser);
+                    User updatedUser = userRepository.save(existinguser);
+                    return UserDTO.builder().id(updatedUser.getId()).name(updatedUser.getName()).email(updatedUser.getEmail()).build();
                 }
         ).orElseThrow(() -> new Exception("User not found with given id"));
     }

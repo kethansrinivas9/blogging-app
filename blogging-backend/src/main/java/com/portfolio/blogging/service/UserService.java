@@ -14,7 +14,7 @@ public interface UserService {
 
     List<User> findAll();
 
-    User editUserById(Long id, User user) throws Exception;
+    UserDTO editUserById(Long id, UserDTO user) throws Exception;
 
     List<BlogDTO> getBlogsByUser(Long userId) throws Exception;
 

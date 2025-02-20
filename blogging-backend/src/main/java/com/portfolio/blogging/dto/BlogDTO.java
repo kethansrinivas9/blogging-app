@@ -1,15 +1,15 @@
 package com.portfolio.blogging.dto;
 
 import com.portfolio.blogging.entity.Blog;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
 public class BlogDTO {
 
     private Long id;

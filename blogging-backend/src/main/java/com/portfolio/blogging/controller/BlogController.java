@@ -21,7 +21,7 @@ public class BlogController {
     private final BlogService blogService;
 
     @PostMapping("/create")
-    public ResponseEntity<Map<String, String>> create(@RequestBody BlogDTO blogDTO) throws Exception {
+    public ResponseEntity<Blog> create(@RequestBody BlogDTO blogDTO) throws Exception {
 
 
         try {
@@ -33,13 +33,14 @@ public class BlogController {
             User user = new User();
             user.setId(blogDTO.getUserId());
             blog.setUser(user);
-            blogService.create(blog);
+
+            Blog createdBlog = blogService.create(blog);
 
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(Map.of("message", "Blog created successfully"));
+                    .body(createdBlog);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("error", "Something went wrong", "message", e.getMessage()));
+                    .body(null);
         }
     }
 

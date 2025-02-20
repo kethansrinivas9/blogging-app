@@ -38,8 +38,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> editUser(@PathVariable Long id, @RequestBody User user) throws Exception {
-        return ResponseEntity.ok().body(userService.editUserById(id, user));
+    public ResponseEntity<UserDTO> editUser(@PathVariable Long id, @RequestBody UserDTO userDTO) throws Exception {
+        return ResponseEntity.ok().body(userService.editUserById(id, userDTO));
     }
 
     /*

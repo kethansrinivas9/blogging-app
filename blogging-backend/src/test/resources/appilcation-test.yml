@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/blogging_app
+    password: kethan
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
