@@ -8,12 +8,9 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.web.server.Cookie;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.Duration;
 
 @RestController
 @RequestMapping("/auth")
@@ -25,16 +22,12 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody User user) {
-        logger.info("===========user object {}", user.toString());
-
         authService.register(user);
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully!");
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
-        logger.info("==========user object {}", user.toString());
-
         try {
             String jwt = authService.login(user);
 

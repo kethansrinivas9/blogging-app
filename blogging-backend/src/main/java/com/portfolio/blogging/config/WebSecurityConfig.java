@@ -52,7 +52,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll() // ✅ Allow CORS preflight requests
                         .requestMatchers("/blog/create").permitAll()
-                        .requestMatchers("/user/all").hasAuthority("ADMIN")
+                        .requestMatchers("/user/all").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
