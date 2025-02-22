@@ -1,10 +1,9 @@
 package com.portfolio.blogging.controller;
 
+import com.portfolio.blogging.dto.UserDTO;
 import com.portfolio.blogging.entity.User;
 import com.portfolio.blogging.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +20,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody User user) {
+    public ResponseEntity<String> register(@RequestBody UserDTO user) {
         authService.register(user);
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully!");
     }
@@ -38,10 +37,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public void logout(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate(); // Destroy session
-        }
+    public void logout(HttpServletRequest request) {
+        authService.logout(request);
     }
 }

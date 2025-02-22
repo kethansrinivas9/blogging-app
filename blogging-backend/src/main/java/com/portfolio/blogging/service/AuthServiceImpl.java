@@ -1,11 +1,15 @@
 package com.portfolio.blogging.service;
 
+import com.portfolio.blogging.dto.UserDTO;
 import com.portfolio.blogging.entity.User;
 import com.portfolio.blogging.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +22,10 @@ public class AuthServiceImpl implements AuthService{
     private final JWTService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public User register(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    public UserDTO register(UserDTO userDTO) {
+        User user = User.builder().name(userDTO.getName()).email(userDTO.getEmail()).password(bCryptPasswordEncoder.encode(userDTO.getPassword())).build();
 
-        return userRepository.save(user);
+        return new UserDTO(userRepository.save(user));
     }
 
 
@@ -35,5 +39,14 @@ public class AuthServiceImpl implements AuthService{
             return jwtService.generateToken(user);
 
         return "Authentication Failure";
+    }
+
+    @Override
+    public void logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        SecurityContextHolder.clearContext();
+        if (session != null) {
+            session.invalidate(); // Destroy session
+        }
     }
 }

@@ -23,7 +23,6 @@ public class BlogController {
     @PostMapping("/create")
     public ResponseEntity<Blog> create(@RequestBody BlogDTO blogDTO) throws Exception {
 
-
         try {
             Blog blog = new Blog();
             blog.setTitle(blogDTO.getTitle());

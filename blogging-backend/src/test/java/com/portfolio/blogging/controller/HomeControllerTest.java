@@ -1,6 +1,7 @@
 package com.portfolio.blogging.controller;
 
 
+import com.portfolio.blogging.config.WebSecurityConfig;
 import com.portfolio.blogging.service.CustomUserDetailsService;
 import com.portfolio.blogging.service.JWTService;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(HomeController.class)
 @WithMockUser(username = "user")
+@Import(WebSecurityConfig.class)
 public class HomeControllerTest {
 
     @Autowired

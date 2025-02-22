@@ -3,6 +3,7 @@ package com.portfolio.blogging.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.portfolio.blogging.config.WebSecurityConfig;
 import com.portfolio.blogging.dto.UserDTO;
 import com.portfolio.blogging.entity.User;
 import com.portfolio.blogging.service.CustomUserDetailsService;
@@ -12,8 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -30,9 +31,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WithMockUser(username="user")
-@AutoConfigureMockMvc
+@WebMvcTest(UserController.class)
+@Import(WebSecurityConfig.class)
 //This will help load the properties required to load the context that helps testing authentication logic
-@SpringBootTest(properties = "spring.profiles.active=test")
 public class UserControllerTest {
 
     @Autowired

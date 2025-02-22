@@ -1,17 +1,22 @@
 package com.portfolio.blogging.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import com.portfolio.blogging.entity.User;
+import lombok.*;
 
-import java.util.Collection;
-import java.util.List;
-
-@Getter
-@RequiredArgsConstructor
 @Builder
+@Getter
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserDTO {
-    private final Long id;
-    private final String name;
-    private final String email;
+    private Long id;
+    private String name;
+    private String email;
+    @Builder.Default
+    private String password="";
+
+    public UserDTO(User user) {
+        this.id = user.getId();
+        this.name = user.getName();
+        this.email = user.getEmail();
+    }
 }

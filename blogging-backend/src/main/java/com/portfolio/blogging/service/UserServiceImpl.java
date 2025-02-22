@@ -41,7 +41,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDTO findByEmail(String email) {
         User user = userRepository.findByEmail(email).get();
-        return new UserDTO(user.getId(), user.getName(), user.getEmail());
+
+        return new UserDTO(user);
     }
 
     @Override
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService{
                     existinguser.setName(user.getName());
 
                     User updatedUser = userRepository.save(existinguser);
-                    return UserDTO.builder().id(updatedUser.getId()).name(updatedUser.getName()).email(updatedUser.getEmail()).build();
+                    return new UserDTO(updatedUser);
                 }
         ).orElseThrow(() -> new Exception("User not found with given id"));
     }
