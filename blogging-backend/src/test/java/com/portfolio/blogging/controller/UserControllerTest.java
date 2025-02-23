@@ -70,8 +70,7 @@ public class UserControllerTest {
 
     @Test
     void testGetUserByIDReturnsUser() throws Exception {
-        Mockito.when(userService.findById(any(Long.class))).thenReturn(user);
-
+        Mockito.when(userService.findById(any(Long.class))).thenReturn(new UserDTO(user));
 
         mockMvc.perform(get("/user/1")
                 .with(csrf()))
@@ -97,7 +96,7 @@ public class UserControllerTest {
     @Test
     @WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
     void testGetAllUsersReturnsAllUsers() throws Exception {
-        Mockito.when(userService.findAll()).thenReturn(List.of(user));
+        Mockito.when(userService.findAll()).thenReturn(List.of(new UserDTO(user)));
 
         mockMvc.perform(get("/user/all")
                         .with(csrf()))
@@ -111,7 +110,7 @@ public class UserControllerTest {
     @Test
     void testGetAllUsersReturnsForbiddenWhenAdminRoleIsNotPresent() throws Exception {
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-        Mockito.when(userService.findAll()).thenReturn(List.of(user));
+        Mockito.when(userService.findAll()).thenReturn(List.of(new UserDTO(user)));
 
         mockMvc.perform(get("/user/all")
                         .with(csrf())

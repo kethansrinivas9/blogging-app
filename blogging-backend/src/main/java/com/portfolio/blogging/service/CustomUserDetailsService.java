@@ -3,6 +3,7 @@ package com.portfolio.blogging.service;
 import com.portfolio.blogging.entity.User;
 import com.portfolio.blogging.repository.UserRepository;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

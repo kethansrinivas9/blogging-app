@@ -44,8 +44,8 @@ public class AuthServiceImpl implements AuthService{
     @Override
     public void logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        SecurityContextHolder.clearContext();
         if (session != null) {
+            SecurityContextHolder.clearContext();
             session.invalidate(); // Destroy session
         }
     }

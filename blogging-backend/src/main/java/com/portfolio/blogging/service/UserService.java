@@ -8,11 +8,11 @@ import com.portfolio.blogging.entity.User;
 import java.util.List;
 
 public interface UserService {
-    User findById(Long userId);
+    UserDTO findById(Long userId);
 
     UserDTO findByEmail(String email);
 
-    List<User> findAll();
+    List<UserDTO> findAll();
 
     UserDTO editUserById(Long id, UserDTO user) throws Exception;
 

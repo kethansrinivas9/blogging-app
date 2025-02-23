@@ -34,8 +34,9 @@ public class UserServiceImpl implements UserService{
     private final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
 
-    public User findById(Long userId) {
-        return userRepository.findById(userId).get();
+    public UserDTO findById(Long userId) {
+        UserDTO user = new UserDTO(userRepository.findById(userId).get());
+        return user;
     }
 
     @Override
@@ -46,8 +47,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserDTO> findAll() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(UserDTO::new).toList();
     }
 
     @Override
@@ -65,9 +67,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<BlogDTO> getBlogsByUser(Long userId) throws Exception {
-        User user = findById(userId);
-
-        if(user!=null)
+        if(findById(userId) != null)
             return blogService.getBlogsByUser(userId);
 
         throw new Exception("User not found with given id: " + userId);
