@@ -1,28 +1,16 @@
 package com.portfolio.blogging.service;
 
-import com.portfolio.blogging.controller.UserController;
 import com.portfolio.blogging.dto.BlogDTO;
 import com.portfolio.blogging.dto.UserDTO;
-import com.portfolio.blogging.entity.Blog;
 import com.portfolio.blogging.entity.User;
 import com.portfolio.blogging.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @Data

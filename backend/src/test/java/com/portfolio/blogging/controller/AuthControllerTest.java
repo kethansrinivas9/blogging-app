@@ -2,25 +2,19 @@ package com.portfolio.blogging.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.portfolio.blogging.config.JWTAuthenticationFilter;
 import com.portfolio.blogging.config.WebSecurityConfig;
 import com.portfolio.blogging.dto.UserDTO;
 import com.portfolio.blogging.entity.User;
 import com.portfolio.blogging.service.AuthService;
 import com.portfolio.blogging.service.CustomUserDetailsService;
 import com.portfolio.blogging.service.JWTService;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 

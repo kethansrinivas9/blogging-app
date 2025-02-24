@@ -2,8 +2,6 @@ package com.portfolio.blogging.service;
 
 import com.portfolio.blogging.dto.BlogDTO;
 import com.portfolio.blogging.dto.UserDTO;
-import com.portfolio.blogging.entity.Blog;
-import com.portfolio.blogging.entity.User;
 
 import java.util.List;
 

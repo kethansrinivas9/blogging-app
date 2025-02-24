@@ -3,8 +3,6 @@ package com.portfolio.blogging.dto;
 import com.portfolio.blogging.entity.Blog;
 import lombok.*;
 
-import java.util.List;
-
 @Getter
 @Setter
 @RequiredArgsConstructor
