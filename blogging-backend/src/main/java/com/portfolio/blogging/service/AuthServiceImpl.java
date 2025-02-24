@@ -28,7 +28,6 @@ public class AuthServiceImpl implements AuthService{
         return new UserDTO(userRepository.save(user));
     }
 
-
     @Override
     public String login(User user) {
         Authentication authentication = authenticationManager.authenticate(
